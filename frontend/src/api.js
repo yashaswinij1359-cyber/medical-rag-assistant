@@ -1,4 +1,6 @@
-const API_URL = import.meta.env https://backend-phi-two-39vercel-n3de9jrvq.vercel.app/api/health || "http://127.0.0.1:8000";
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://backend-phi-two-39vercel-n3de9jrvq.vercel.app";
 
 export async function checkHealth() {
   const response = await fetch(`${API_URL}/api/health`);
