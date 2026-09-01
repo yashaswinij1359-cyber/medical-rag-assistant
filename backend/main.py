@@ -39,14 +39,15 @@ app = FastAPI(
 # CORS
 # --------------------------------------------------
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://frontend-topaz-pi-15.vercel.app"],
+    allow_origins=["*"],  # Change "*" to your frontend URL...
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # --------------------------------------------------
 # STORAGE
