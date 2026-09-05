@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const checkBackend = async () => {
   const response = await fetch(`${API_URL}/api/health`);
@@ -10,8 +10,8 @@ export const checkBackend = async () => {
   return response.json();
 };
 
-export const askQuestion = async (question) => {
-  const response = await fetch(`${API_URL}/ask`, {
+export const askAssistant = async (question) => {
+  const response = await fetch(`${API_URL}/api/ask`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,6 +23,34 @@ export const askQuestion = async (question) => {
 
   if (!response.ok) {
     throw new Error("Failed to get response from backend");
+  }
+
+  return response.json();
+};
+
+export const uploadResearchPaper = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${API_URL}/api/upload`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to upload the research paper");
+  }
+
+  return response.json();
+};
+
+export const searchResearch = async (query) => {
+  const response = await fetch(
+    `${API_URL}/api/research?query=${encodeURIComponent(query)}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to search research");
   }
 
   return response.json();
