@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { askAssistant, uploadResearchPaper,searchResearch } from "./api";
+import { askAssistant, uploadResearchPaper,searchResearch,checkBackend as checkBackendApi} from "./api";
 import {
   Activity,
   ArrowUp,
@@ -30,7 +30,7 @@ import {
 
 import "./index.css";
 
-const API_URL = "http://127.0.0.1:8000";
+
 
 function App() {
   const [activePage, setActivePage] = useState("Overview");
@@ -51,13 +51,13 @@ function App() {
   }, []);
 
   async function checkBackend() {
-    try {
-      const response = await fetch(`${API_URL}/api/health`);
-      setBackendOnline(response.ok);
-    } catch {
-      setBackendOnline(false);
-    }
+  try {
+    await checkBackendApi();
+    setBackendOnline(true);
+  } catch {
+    setBackendOnline(false);
   }
+}
 
  async function handleFileUpload(event) {
   const files = Array.from(event.target.files || []);
