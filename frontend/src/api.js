@@ -3,10 +3,9 @@
 // React/Vite Frontend <-> FastAPI Backend
 // ============================================================
 
-const API_URL =
-  import.meta.env.VITE_API_URL ||
-  "https://medical-rag-assistant-zduo.onrender.com";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
+export default API_URL;
 
 // ============================================================
 // COMMON RESPONSE HANDLER
